@@ -144,8 +144,10 @@ void YoloObjectDetector::init() {
       nodeHandle_.advertise<darknet_ros_msgs::ObjectCount>(objectDetectorTopicName, objectDetectorQueueSize, objectDetectorLatch);
   boundingBoxesPublisher_ =
       nodeHandle_.advertise<darknet_ros_msgs::BoundingBoxes>(boundingBoxesTopicName, boundingBoxesQueueSize, boundingBoxesLatch);
+ // detectionImagePublisher_ =
+ //     nodeHandle_.advertise<sensor_msgs::Image>(detectionImageTopicName, detectionImageQueueSize, detectionImageLatch);
   detectionImagePublisher_ =
-      nodeHandle_.advertise<sensor_msgs::Image>(detectionImageTopicName, detectionImageQueueSize, detectionImageLatch);
+      imageTransport_.advertise(detectionImageTopicName, detectionImageQueueSize, detectionImageLatch);
 
   // Action servers.
   std::string checkForObjectsActionName;
